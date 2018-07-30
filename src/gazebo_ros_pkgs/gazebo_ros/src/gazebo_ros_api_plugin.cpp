@@ -228,7 +228,7 @@ void GazeboRosApiPlugin::advertiseServices()
   pub_clock_ = nh_->advertise<rosgraph_msgs::Clock>("/clock",10);
 
   // Advertise spawn services on the custom queue
-  std::string spawn_sdf_entity_service_name("spawn_sdf_entity");
+  std::string spawn_sdf_entity_service_name("spawn_sdf_model");
   ros::AdvertiseServiceOptions spawn_sdf_entity_aso =
     ros::AdvertiseServiceOptions::create<gazebo_msgs::SpawnEntity>(
                                                                    spawn_sdf_entity_service_name,

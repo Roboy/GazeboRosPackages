@@ -49,6 +49,7 @@ add_service_files(DIRECTORY srv FILES
   SetLinkState.srv
   SetPhysicsProperties.srv
   SetJointTrajectory.srv
+  SpawnModel.srv
 # NRP custom services
   AdvanceSimulation.srv
   DeleteLight.srv

@@ -17,6 +17,12 @@ namespace gazebo
 //////////////////////////////////////////////////
 MuscleInterfacePlugin::MuscleInterfacePlugin()
 {
+  if (!ros::isInitialized()) {
+        int argc = 0;
+        char **argv = NULL;
+        ros::init(argc, argv, "ForceCompensatingHalterung",
+                  ros::init_options::NoSigintHandler | ros::init_options::AnonymousName);
+    }
   //gzdbg << __FUNCTION__ << std::endl;
   rosNode = std::make_unique<ros::NodeHandle>("gazebo_muscle_interface");
 }
@@ -102,8 +108,12 @@ void MuscleInterfacePlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf)
   if (m_model)
   {
     physics::WorldPtr world = m_model->GetWorld();
-    if (world)
+    // physics::WorldPtr world = physics::get_world("default");
+    if (world) {
+      // physics::PresetManagerPtr presetManager = world->PresetMgr();
+      // presetManager->SetCurrentProfileParam("real_time_update_rate", -1);
       m_engine = boost::dynamic_pointer_cast<physics::OpensimPhysics>(world->GetPhysicsEngine());
+    }
   }
   if (m_model == nullptr || m_engine == nullptr)
     gzwarn << "Muscle control plugin loaded without OpenSim physics plugin." << std::endl;

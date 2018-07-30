@@ -15,7 +15,7 @@ def spawn_sdf_model_client(model_name, model_xml, robot_namespace, initial_pose,
     rospy.loginfo("Waiting for service %s/spawn_sdf_model"%gazebo_namespace)
     rospy.wait_for_service(gazebo_namespace+'/spawn_sdf_model')
     try:
-      spawn_sdf_model = rospy.ServiceProxy(gazebo_namespace+'/spawn_sdf_model', SpawnModel)
+      spawn_sdf_model = rospy.ServiceProxy(gazebo_namespace+'/spawn_sdf_model', SpawnEntity)
       rospy.loginfo("Calling service %s/spawn_sdf_model"%gazebo_namespace)
       resp = spawn_sdf_model(model_name, model_xml, robot_namespace, initial_pose, reference_frame)
       rospy.loginfo("Spawn status: %s"%resp.status_message)
